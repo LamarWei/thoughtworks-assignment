@@ -48,9 +48,8 @@ public class DataConventor {
         return new JSONObject(map);
 	}
 	
-	public static boolean isInteger(String str){
-		Pattern pattern = Pattern.compile("[0-9]*");  
-	    return pattern.matcher(str).matches();
+	public static boolean isExactDivision(double d1){
+	    return d1 == Math.floor(d1) && d1 > 0.00;
 	}
 
 }

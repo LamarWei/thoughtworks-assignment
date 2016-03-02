@@ -6,7 +6,7 @@ public class Receipt {
 	
 	private final String shopName = "MYSHOP";
 	private List<SoldItem> items;
-	private List<String> freeItemList;
+	private List<SoldItem> freeItemList;
 	private boolean showFreeItemList = false;
 	private double total;
 	private double total_savings;
@@ -17,10 +17,10 @@ public class Receipt {
 	public void setItems(List<SoldItem> items) {
 		this.items = items;
 	}
-	public List<String> getFreeItemList() {
+	public List<SoldItem> getFreeItemList() {
 		return freeItemList;
 	}
-	public void setFreeItemList(List<String> freeItemList) {
+	public void setFreeItemList(List<SoldItem> freeItemList) {
 		this.freeItemList = freeItemList;
 	}
 	public String getShopName() {

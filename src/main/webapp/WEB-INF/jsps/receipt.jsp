@@ -23,5 +23,20 @@
 <br>
 </c:forEach>
 -------------------------------------
+<c:if test="${receipt.isShowFreeItemList() }">
+<br>
+买二赠一商品：
+<br>
+<c:forEach var="freeItem" items="${receipt.getFreeItemList() }">
+名称：${freeItem.getItemName() }，数量：${freeItem.getQuantity() }（${freeItem.getUnit() }）<br>
+</c:forEach>
+-------------------------------------
+</c:if>
+<br>
+总计：${receipt.getTotal() }（元）<br>
+<c:if test="${receipt.getTotal_savings() gt 0 }">
+节省：${receipt.getTotal_savings() }（元）<br>
+</c:if>
+*************************************
 </body>
 </html>

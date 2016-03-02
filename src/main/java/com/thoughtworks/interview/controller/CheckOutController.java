@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.thoughtworks.interview.exception.ItemNotExsitException;
@@ -42,7 +41,7 @@ public class CheckOutController {
 		JSONObject json = DataConventor.StringtoJson(str);
 		Receipt receipt = new Receipt();
 		List<SoldItem> items = new ArrayList<SoldItem>();
-		List<String> freeItemList = new ArrayList<String>();
+		List<SoldItem> freeItemList = new ArrayList<SoldItem>();
 		double total = 0.00;
 		double total_savings = 0.00;
 		boolean showFreeItemList = false;
@@ -55,9 +54,9 @@ public class CheckOutController {
 				items.add(new SoldItem(item,qty,salePrice,saving));
 				total += salePrice;
 				total_savings += saving;
-				if(DataConventor.isInteger(String.valueOf(saving/item.getPrice()))){
+				if(DataConventor.isExactDivision(saving/item.getPrice())){
 					showFreeItemList = true;
-					freeItemList.add(item.getItemName()+","+(saving/item.getPrice()));
+					freeItemList.add(new SoldItem(item,(int)Math.floor(saving/item.getPrice()),0.00,0.00));
 				}
 			}
 		} catch (ItemNotExsitException e) {

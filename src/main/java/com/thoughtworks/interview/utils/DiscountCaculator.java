@@ -27,7 +27,7 @@ public class DiscountCaculator {
 			savings = item.getPrice() * Math.ceil(qty/ 3) ;
 			break;
 		case 2:
-			savings = item.getPrice() * 0.05;
+			savings = item.getPrice() * 0.05 * qty;
 			break;
 		default:
 			savings = 0;
