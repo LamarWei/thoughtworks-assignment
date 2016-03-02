@@ -9,7 +9,8 @@ package com.thoughtworks.interview.model;
 public class Item {
 
 	private String itemName;
-	private double unitPrice;
+	private double price;
+	private String unit;
 	private String itemCategory;
 	private String itemSerial;
 	private int discount = Discount.NONE;
@@ -17,11 +18,12 @@ public class Item {
 	public Item(){
 	}
 	
-	public Item(String itemName, double unitPrice, String itemCategory,
+	public Item(String itemName, double price, String unit, String itemCategory,
 			String itemSerial) {
 		super();
 		this.itemName = itemName;
-		this.unitPrice = unitPrice;
+		this.price = price;
+		this.unit = unit;
 		this.itemCategory = itemCategory;
 		this.itemSerial = itemSerial;
 	}
@@ -36,12 +38,20 @@ public class Item {
 		this.itemName = itemName;
 	}
 
-	public double getItemPrice() {
-		return unitPrice;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setItemPrice(double itemPrice) {
-		this.unitPrice = itemPrice;
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	public String getItemCategory() {
@@ -71,7 +81,7 @@ public class Item {
 	public String toString() {
 		return "{'itemSerial':'" + this.itemSerial + "'," +
 				"'itemName':'"+ this.itemName + "'," +
-				"'itemPrice':" + this.unitPrice + "," + 
+				"'itemPrice':" + this.price + "," + 
 				"'itemCategory':'" + this.itemCategory +"',"+ 
 				"'discount':" + this.discount + "}";
 	}

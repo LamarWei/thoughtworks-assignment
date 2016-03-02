@@ -12,10 +12,6 @@
 
 	<context:annotation-config />
 
-	<!-- <context:component-scan base-package="com.lamarstudio.csi.controller"> 
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" 
-		/> </context:component-scan> -->
-
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<!-- 国际化信息所在的文件名 -->
@@ -24,24 +20,7 @@
 		<property name="useCodeAsDefaultMessage" value="true" />
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
+	
+	<bean id="itemService" class="com.thoughtworks.interview.service.impl.ItemServiceImpl" />
 
-	<bean name="jobService" class="com.lamarstudio.csi.services.impl.JobServiceImpl" />
-
-	<bean name="productService" class="com.lamarstudio.csi.services.impl.ProductServiceImpl" />
-	
-	<bean name="userService" class="com.lamarstudio.csi.services.impl.UserServiceImpl" />
-	
-	<bean name="searchService" class="com.lamarstudio.csi.services.impl.SearchServiceImpl"/>
-	
-	<bean name="fileService" class="com.lamarstudio.csi.services.impl.FileServiceImpl" />
-	
-	<bean name="tokenService" class="com.lamarstudio.csi.services.impl.TokenServiceImpl" />
-	
-	<bean name="validateService" class="com.lamarstudio.csi.services.impl.ValidateServiceImpl" />
-	
-	<bean name="orderService" class="com.lamarstudio.csi.services.impl.OrderServiceImpl" />
-	
-	<bean name="paymentService" class="com.lamarstudio.csi.services.impl.PaymentServiceImpl" />
-	
-	<bean name="mailSetting" class="com.lamarstudio.csi.util.MailSetting" />
 </beans>

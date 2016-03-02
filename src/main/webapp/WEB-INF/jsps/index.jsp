@@ -1,12 +1,55 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>ThoughtWorks Assignment Demo</title>
+<script src="resources/js/jquery.min.js"></script>
 </head>
 <body>
-
+<c:forEach var="item" items="${items }">
+编号：${item.getItemSerial() }，名称：${item.getItemName() }，单价：${item.getPrice() }（元），类别：${item.getItemCategory() }
+<c:if test="${item.getDiscount() ne 1 }" >
+	<input id="${item.getItemSerial() }" class="discount_btn_1" type="button" value="买二赠一" />
+</c:if>
+<c:if test="${item.getDiscount() ne 2 }" >
+	<input id="${item.getItemSerial() }" class="discount_btn_2" type="button" value="95折" />
+</c:if>
+<c:if test="${item.getDiscount() ne 0 }" >
+	<input id="${item.getItemSerial() }" class="discount_btn_0" type="button" value="不优惠" />
+</c:if>
+<br>
+</c:forEach>
+<form action="" method="post">
+<div>
+	<label>请输入数据：</label>
+	<dir>
+		<textarea rows="4" cols="60" name="itemStr" >'ITEM0000001','ITEM0000001','ITEM0000001','ITEM0000001','ITEM0000001','ITEM0000003-2','ITEM0000005','ITEM0000005','ITEM0000005'</textarea>
+	</dir>
+</div>
+<button type="submit" >打印</button>
+</form>
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".discount_btn_1,.discount_btn_2,.discount_btn_0").on("click",function(){
+		var id = this.id;
+		var discount = this.className.split('_')[2];
+		$.ajax({
+			type:"POST",
+			url:"setdiscount",
+			data:new Object({
+				id:id,
+				discount:discount
+			}),
+			dataType:"text",
+			success:window.location.reload()
+		});
+	});
+	
+});
+
+</script>
 </html>

@@ -17,7 +17,7 @@
 	<context:annotation-config />
 
 	<!-- DispatcherServlet上下文， 只管理@Controller类型的bean， 忽略其他型的bean, 如@Service -->
-	<context:component-scan base-package="com.lamarstudio.csi.controller">
+	<context:component-scan base-package="com.thoughtworks.interview.controller">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
@@ -70,15 +70,6 @@
 			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/jsps/" />
 		<property name="suffix" value=".jsp" />
-	</bean>
-
-
-	<!--5*1024*1024即5M resolveLazily属性启用是为了推迟文件解析，以便捕获文件大小异常 -->
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="5242880" />
-		<property name="defaultEncoding" value="UTF-8" />
-		<property name="resolveLazily" value="true" />
 	</bean>
 
 </beans>

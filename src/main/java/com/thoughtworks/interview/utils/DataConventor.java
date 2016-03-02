@@ -47,5 +47,10 @@ public class DataConventor {
         }
         return new JSONObject(map);
 	}
+	
+	public static boolean isInteger(String str){
+		Pattern pattern = Pattern.compile("[0-9]*");  
+	    return pattern.matcher(str).matches();
+	}
 
 }
