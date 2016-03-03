@@ -59,19 +59,6 @@ public class CheckOutController {
 					return "index";
 				}
 				int qty = json.getIntValue(key);
-				/**
-				 * If item is available for both two sale,
-				 * when item match buy two get another free condition, use this rule
-				 * then use 5% off rule.
-				 */
-				if(item.getDiscount() == 3){
-					if(qty>2){
-						item.setDiscount(Discount.BUYTWOGETANOTHERFREE);
-					}
-					else{
-						item.setDiscount(Discount.FIVEPERCENTOFF);
-					}
-				}
 				double salePrice=DiscountCaculator.getSubTotal(item, qty);
 				double saving=DiscountCaculator.getSavings(item, qty);
 				items.add(new SoldItem(item,qty,salePrice,saving));

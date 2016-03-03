@@ -52,6 +52,25 @@ public class DiscountCaculatorTest {
 		sub_total = DiscountCaculator.getSubTotal(item,qty);
 		savings = DiscountCaculator.getSavings(item, qty);
 		Assert.assertEquals(sub_total, item.getPrice()*qty*0.95,0);
+		/**
+		 * Available for all sale
+		 */
+		item.setDiscount(Discount.SALE);
+		/**
+		 * If quantity equals or is greater than three, item matches buy two get another one free rule. 
+		 */
+		sub_total = DiscountCaculator.getSubTotal(item,qty);
+		savings = DiscountCaculator.getSavings(item, qty);
+		Assert.assertNotEquals(sub_total, item.getPrice() * qty);
+		Assert.assertEquals(item.getPrice()*qty, sub_total + savings,0);
+		/**
+		 * If quantity is less than three, item matches 5% off rule. 
+		 */
+		qty = 2;
+		sub_total = DiscountCaculator.getSubTotal(item,qty);
+		savings = DiscountCaculator.getSavings(item, qty);
+		Assert.assertEquals(sub_total, item.getPrice()*qty*0.95,0);
+		
 	}
 	
 	

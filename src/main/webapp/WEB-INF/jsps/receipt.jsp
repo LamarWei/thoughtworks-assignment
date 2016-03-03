@@ -13,7 +13,7 @@
 <c:forEach var="soldItem" items="${receipt.getItems() }">
 名称：${soldItem.getItemName() }，数量：${soldItem.getQuantity() } ${soldItem.getUnit() }，单价：${soldItem.getPrice() }（元）
 <c:choose>
-	<c:when test="${soldItem.getDiscount() eq 2 }">
+	<c:when test="${soldItem.getDiscount() eq 2 or (soldItem.getDiscount() eq 3 and soldItem.getQuantity() lt 3)}">
 	，小计：${soldItem.getSub_total() }（元），节省：${soldItem.getSavings() }（元）
 	</c:when>
 	<c:otherwise>

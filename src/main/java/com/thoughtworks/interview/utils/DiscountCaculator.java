@@ -1,5 +1,6 @@
 package com.thoughtworks.interview.utils;
 
+import com.thoughtworks.interview.model.Discount;
 import com.thoughtworks.interview.model.Item;
 
 /**
@@ -12,7 +13,21 @@ public class DiscountCaculator {
 
 	public static double getSubTotal(Item item, int qty) {
 		double sub_total;
-		switch (item.getDiscount()) {
+		int discount = item.getDiscount();
+		/**
+		 * If item is available for both two sale,
+		 * when item match buy two get another free condition, use this rule
+		 * then use 5% off rule.
+		 */
+		if(item.getDiscount() == 3){
+			if(qty>2){
+				discount = Discount.BUYTWOGETANOTHERFREE;
+			}
+			else{
+				discount = (Discount.FIVEPERCENTOFF);
+			}
+		}
+		switch (discount) {
 		case 1:
 			sub_total = item.getPrice() * (qty - Math.ceil(qty/ 3)) ;
 			break;
@@ -28,7 +43,21 @@ public class DiscountCaculator {
 	
 	public static double getSavings(Item item, int qty){
 		double savings;
-		switch (item.getDiscount()) {
+		int discount = item.getDiscount();
+		/**
+		 * If item is available for both two sale,
+		 * when item match buy two get another free condition, use this rule
+		 * then use 5% off rule.
+		 */
+		if(item.getDiscount() == 3){
+			if(qty>2){
+				discount = Discount.BUYTWOGETANOTHERFREE;
+			}
+			else{
+				discount = (Discount.FIVEPERCENTOFF);
+			}
+		}
+		switch (discount) {
 		case 1:
 			savings = item.getPrice() * Math.ceil(qty/ 3) ;
 			break;
