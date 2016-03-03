@@ -27,6 +27,8 @@ public class ItemServiceImpl implements ItemService {
 		DEFAULT_ITEM_MAP.put("ITEM0000008",new Item("乒乓球鞋", 300.00, "双", "运动鞋类", "ITEM0000008"));
 		DEFAULT_ITEM_MAP.put("ITEM0000009",new Item("羽毛球球拍", 650.00, "副", "运动用品", "ITEM0000009"));
 		DEFAULT_ITEM_MAP.put("ITEM0000010",new Item("乒乓球球拍", 99.00, "副", "运动用品", "ITEM0000010"));
+		DEFAULT_ITEM_MAP.put("ITEM0000011",new Item("苹果", 3.00, "斤", "水果", "ITEM0000011"));
+		DEFAULT_ITEM_MAP.put("ITEM0000012",new Item("香蕉", 4.00, "斤", "水果", "ITEM0000012"));
 	}
 
 	@Override
