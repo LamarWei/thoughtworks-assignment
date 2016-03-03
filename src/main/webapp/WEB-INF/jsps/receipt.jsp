@@ -11,7 +11,7 @@
 ***&lt; ${receipt.getShopName() } &gt;购物清单***
 <br>
 <c:forEach var="soldItem" items="${receipt.getItems() }">
-名称：${soldItem.getItemName() }，数量：${soldItem.getQuantity() }（${soldItem.getUnit() }），单价：${soldItem.getPrice() }（元）
+名称：${soldItem.getItemName() }，数量：${soldItem.getQuantity() } ${soldItem.getUnit() }，单价：${soldItem.getPrice() }（元）
 <c:choose>
 	<c:when test="${soldItem.getDiscount() eq 2 }">
 	，小计：${soldItem.getSub_total() }（元），节省：${soldItem.getSavings() }（元）
@@ -28,7 +28,7 @@
 买二赠一商品：
 <br>
 <c:forEach var="freeItem" items="${receipt.getFreeItemList() }">
-名称：${freeItem.getItemName() }，数量：${freeItem.getQuantity() }（${freeItem.getUnit() }）<br>
+名称：${freeItem.getItemName() }，数量：${freeItem.getQuantity() }${freeItem.getUnit() }<br>
 </c:forEach>
 -------------------------------------
 </c:if>

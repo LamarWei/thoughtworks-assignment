@@ -15,7 +15,7 @@
 </c:if>
 </div>
 <c:forEach var="item" items="${items }">
-编号：${item.getItemSerial() }，名称：${item.getItemName() }，单价：${item.getPrice() }（元），类别：${item.getItemCategory() }
+编号：${item.getItemSerial() }，名称：${item.getItemName() }，单价：${item.getPrice() }（元/${item.getUnit() }），类别：${item.getItemCategory() }
 <c:if test="${item.getDiscount() ne 1 }" >
 	<input id="${item.getItemSerial() }" class="discount_btn_1" type="button" value="买二赠一" />
 </c:if>
@@ -34,7 +34,7 @@
 <div>
 	<label>请输入数据：</label>
 	<dir>
-		<textarea rows="4" cols="60" name="itemStr" >'ITEM0000001','ITEM0000001','ITEM0000001','ITEM0000001','ITEM0000001','ITEM0000003-2','ITEM0000005','ITEM0000005','ITEM0000005'</textarea>
+		<textarea rows="4" cols="60" name="itemStr" >'ITEM0000001','ITEM0000001','ITEM0000001','ITEM0000001','ITEM0000001','ITEM0000012-2','ITEM0000005','ITEM0000005','ITEM0000005'</textarea>
 	</dir>
 </div>
 <button type="submit" >打印</button>
