@@ -6,7 +6,7 @@ import com.thoughtworks.interview.exception.ItemNotExsitException;
 import com.thoughtworks.interview.model.Item;
 
 /**
- * 
+ * Basic item operation services
  * @author WeiWei
  *
  */

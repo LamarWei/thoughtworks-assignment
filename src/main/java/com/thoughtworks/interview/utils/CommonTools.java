@@ -12,10 +12,10 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import com.alibaba.fastjson.JSONObject;
 
-public class DataConventor {
+public class CommonTools {
 	
 	/**
-	 * Convert input string to json object
+	 * Convert inputed string to Json object
 	 * @param str ['itemName','itemName',...]
 	 * @return {"itemName":amount,...}
 	 */
@@ -48,6 +48,11 @@ public class DataConventor {
         return new JSONObject(map);
 	}
 	
+	/**
+	 * To identify the result of division
+	 * @param d1 result of division
+	 * @return
+	 */
 	public static boolean isExactDivision(double d1){
 	    return d1 == Math.floor(d1) && d1 > 0.00;
 	}

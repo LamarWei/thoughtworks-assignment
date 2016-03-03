@@ -9,6 +9,11 @@
 <script src="resources/js/jquery.min.js"></script>
 </head>
 <body>
+<div id="message">
+<c:if test="${error ne null }">
+	<h3>${error }</h3>
+</c:if>
+</div>
 <c:forEach var="item" items="${items }">
 编号：${item.getItemSerial() }，名称：${item.getItemName() }，单价：${item.getPrice() }（元），类别：${item.getItemCategory() }
 <c:if test="${item.getDiscount() ne 1 }" >
@@ -16,6 +21,9 @@
 </c:if>
 <c:if test="${item.getDiscount() ne 2 }" >
 	<input id="${item.getItemSerial() }" class="discount_btn_2" type="button" value="95折" />
+</c:if>
+<c:if test="${item.getDiscount() ne 3 }" >
+	<input id="${item.getItemSerial() }" class="discount_btn_3" type="button" value="95折和买二赠一同时参加" />
 </c:if>
 <c:if test="${item.getDiscount() ne 0 }" >
 	<input id="${item.getItemSerial() }" class="discount_btn_0" type="button" value="不优惠" />
@@ -34,10 +42,11 @@
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
-	$(".discount_btn_1,.discount_btn_2,.discount_btn_0").on("click",function(){
+	$(".discount_btn_1,.discount_btn_2,.discount_btn_0,.discount_btn_3").on("click",function(){
 		var id = this.id;
 		var discount = this.className.split('_')[2];
 		$.ajax({
+			async:false,
 			type:"POST",
 			url:"setdiscount",
 			data:new Object({
@@ -45,7 +54,14 @@ $(document).ready(function(){
 				discount:discount
 			}),
 			dataType:"text",
-			success:window.location.reload()
+			success:function(data){
+				var result = eval("("+data+")");
+				if(result.status == 'success'){
+					window.location.reload();
+				}else{
+					$("#message").html("<h3>"+result.error+"</h3>");
+				}
+			}
 		});
 	});
 	

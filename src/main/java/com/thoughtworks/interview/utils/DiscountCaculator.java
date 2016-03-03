@@ -2,9 +2,15 @@ package com.thoughtworks.interview.utils;
 
 import com.thoughtworks.interview.model.Item;
 
+/**
+ * Calculate item price
+ * 
+ * @author WeiWei
+ *
+ */
 public class DiscountCaculator {
 
-	public static double getSalePrice(Item item, int qty) {
+	public static double getSubTotal(Item item, int qty) {
 		double sub_total;
 		switch (item.getDiscount()) {
 		case 1:

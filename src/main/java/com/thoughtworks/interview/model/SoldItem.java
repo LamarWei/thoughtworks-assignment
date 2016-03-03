@@ -1,9 +1,10 @@
 package com.thoughtworks.interview.model;
 
 /**
- * Item info shows on receipt
+ * Individual sold item model
+ * Shown on receipt
+ * 
  * @author WeiWei
- *
  */
 public class SoldItem extends Item {
 	

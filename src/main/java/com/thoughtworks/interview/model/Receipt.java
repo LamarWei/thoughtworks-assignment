@@ -2,10 +2,19 @@ package com.thoughtworks.interview.model;
 
 import java.util.List;
 
+/**
+ * Receipt information model
+ * @author Administrator
+ *
+ */
 public class Receipt {
 	
 	private final String shopName = "MYSHOP";
 	private List<SoldItem> items;
+	/**
+	 * Contains free items
+	 * Only for buy two get another one free 
+	 */
 	private List<SoldItem> freeItemList;
 	private boolean showFreeItemList = false;
 	private double total;

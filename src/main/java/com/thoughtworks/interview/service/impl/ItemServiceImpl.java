@@ -11,6 +11,9 @@ import com.thoughtworks.interview.service.ItemService;
 
 public class ItemServiceImpl implements ItemService {
 	
+	/**
+	 * Default item list
+	 */
 	private static Map<String,Item> DEFAULT_ITEM_MAP = new HashMap<String, Item>();
 	
 	static{
