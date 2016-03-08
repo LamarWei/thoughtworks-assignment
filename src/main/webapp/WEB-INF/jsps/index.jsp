@@ -47,19 +47,18 @@ $(document).ready(function(){
 		var discount = this.className.split('_')[2];
 		$.ajax({
 			async:false,
-			type:"POST",
+			type:"put",
 			url:"setdiscount",
 			data:new Object({
 				id:id,
 				discount:discount
 			}),
-			dataType:"text",
+			dataType:"json",
 			success:function(data){
-				var result = eval("("+data+")");
-				if(result.status == 'success'){
+				if(data.status == 'success'){
 					window.location.reload();
 				}else{
-					$("#message").html("<h3>"+result.error+"</h3>");
+					$("#message").html("<h3>"+data.error+"</h3>");
 				}
 			}
 		});

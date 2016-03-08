@@ -1,7 +1,5 @@
 package com.thoughtworks.interview.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.thoughtworks.interview.exception.ItemNotExsitException;
-import com.thoughtworks.interview.model.Discount;
 import com.thoughtworks.interview.model.Item;
 import com.thoughtworks.interview.model.Receipt;
 import com.thoughtworks.interview.model.SoldItem;
@@ -78,22 +77,17 @@ public class CheckOutController {
 		return "receipt";
 	}
 	
-	@RequestMapping(value="/setdiscount",method=RequestMethod.POST)
-	public void setItemDiscount(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value="/setdiscount",method=RequestMethod.PUT)
+	@ResponseBody
+	public JSONObject setItemDiscount(HttpServletRequest request, HttpServletResponse response){
 		String itemSerial = request.getParameter("id");
 		String result = "{'status':'success'}";
 		int discount = Integer.parseInt(request.getParameter("discount"));
-		PrintWriter pw = null;
 		try {
-			pw = response.getWriter();
 			itemService.setDiscount(itemSerial, discount);
 		} catch (ItemNotExsitException e) {
 			result = "{'status':'fail','error':'Item "+itemSerial+" not exsit!'}";
-		} catch (IOException e) {
-			result = "{'status':'fail','error':'Set fail!'}";
-		} finally{
-			pw.write(result);
-			pw.flush();
-		}
+		} 
+		return JSON.parseObject(result);
 	}
 }
