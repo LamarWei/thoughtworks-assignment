@@ -87,7 +87,6 @@ public class CheckOutController {
 		try {
 			pw = response.getWriter();
 			itemService.setDiscount(itemSerial, discount);
-			response.setCharacterEncoding("utf-8");
 		} catch (ItemNotExsitException e) {
 			result = "{'status':'fail','error':'Item "+itemSerial+" not exsit!'}";
 		} catch (IOException e) {

@@ -31,6 +31,8 @@
 	<mvc:interceptors>
 		<!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 -->
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		<!-- Character encoding -->
+		<!-- <bean class="com.thoughtworks.interview.interceptor.CharacterEncodingInterceptor"></bean> -->
 	</mvc:interceptors>
 
 	<!--local解析器 -->
