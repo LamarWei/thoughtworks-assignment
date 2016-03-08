@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.thoughtworks.interview.exception.ItemNotExsitException;
 import com.thoughtworks.interview.model.Item;
@@ -81,13 +80,15 @@ public class CheckOutController {
 	@ResponseBody
 	public JSONObject setItemDiscount(HttpServletRequest request, HttpServletResponse response){
 		String itemSerial = request.getParameter("id");
-		String result = "{'status':'success'}";
+		JSONObject json = new JSONObject();
+		json.put("status", "success");
 		int discount = Integer.parseInt(request.getParameter("discount"));
 		try {
 			itemService.setDiscount(itemSerial, discount);
 		} catch (ItemNotExsitException e) {
-			result = "{'status':'fail','error':'Item "+itemSerial+" not exsit!'}";
+			json.put("status", "fail");
+			json.put("error", "Item "+itemSerial+" not exsit!");
 		} 
-		return JSON.parseObject(result);
+		return json;
 	}
 }
