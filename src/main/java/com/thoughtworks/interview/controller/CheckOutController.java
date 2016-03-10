@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.thoughtworks.interview.exception.ItemNotExsitException;
+import com.thoughtworks.interview.model.Discount;
 import com.thoughtworks.interview.model.Item;
 import com.thoughtworks.interview.model.Receipt;
 import com.thoughtworks.interview.model.SoldItem;
@@ -76,13 +77,13 @@ public class CheckOutController {
 		return "receipt";
 	}
 	
-	@RequestMapping(value="/setdiscount",method=RequestMethod.PUT)
+	@RequestMapping(value="/discount",method=RequestMethod.PUT)
 	@ResponseBody
 	public JSONObject setItemDiscount(HttpServletRequest request, HttpServletResponse response){
 		String itemSerial = request.getParameter("id");
 		JSONObject json = new JSONObject();
 		json.put("status", "success");
-		int discount = Integer.parseInt(request.getParameter("discount"));
+		Discount discount = Discount.nameOf(request.getParameter("discount"));
 		try {
 			itemService.setDiscount(itemSerial, discount);
 		} catch (ItemNotExsitException e) {

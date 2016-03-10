@@ -3,6 +3,7 @@ package com.thoughtworks.interview.service;
 import java.util.List;
 
 import com.thoughtworks.interview.exception.ItemNotExsitException;
+import com.thoughtworks.interview.model.Discount;
 import com.thoughtworks.interview.model.Item;
 
 /**
@@ -17,7 +18,7 @@ public interface ItemService {
 	 * @param discount
 	 * @return
 	 */
-	boolean setDiscount(String itemSerial,int discount) throws ItemNotExsitException;
+	boolean setDiscount(String itemSerial,Discount discount) throws ItemNotExsitException;
 	/**
 	 * Get all items
 	 * @return

@@ -13,7 +13,7 @@ public class Item {
 	private String unit;
 	private String itemCategory;
 	private String itemSerial;
-	private int discount = Discount.NONE;
+	private Discount discount = Discount.NODISCOUNT;
 	
 	public Item(){
 	}
@@ -27,8 +27,6 @@ public class Item {
 		this.itemCategory = itemCategory;
 		this.itemSerial = itemSerial;
 	}
-
-
 
 	public String getItemName() {
 		return itemName;
@@ -70,11 +68,12 @@ public class Item {
 		this.itemSerial = itemSerial;
 	}
 
-	public int getDiscount() {
+
+	public Discount getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(int discount) {
+	public void setDiscount(Discount discount) {
 		this.discount = discount;
 	}
 

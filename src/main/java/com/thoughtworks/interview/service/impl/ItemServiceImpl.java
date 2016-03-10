@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.thoughtworks.interview.exception.ItemNotExsitException;
+import com.thoughtworks.interview.model.Discount;
 import com.thoughtworks.interview.model.Item;
 import com.thoughtworks.interview.service.ItemService;
 
@@ -32,7 +33,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public boolean setDiscount(String itemSerial, int discount) throws ItemNotExsitException {
+	public boolean setDiscount(String itemSerial, Discount discount) throws ItemNotExsitException {
 		if(!DEFAULT_ITEM_MAP.containsKey(itemSerial)){
 			throw new ItemNotExsitException();
 		}

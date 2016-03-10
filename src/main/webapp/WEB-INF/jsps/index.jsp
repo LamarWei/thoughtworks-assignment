@@ -45,6 +45,7 @@ $(document).ready(function(){
 	$(".discount_btn_1,.discount_btn_2,.discount_btn_0,.discount_btn_3").on("click",function(){
 		var id = this.id;
 		var discount = this.className.split('_')[2];
+		
 		$.ajax({
 			async:false,
 			type:"put",
@@ -63,7 +64,22 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
+	function getDiscount(obj){
+		switch (obj) {
+		case 1:
+			return "buytwogetonefree";
+			break;
+		case 2:
+			return "fivepercentoff";
+			break;
+		case 3:
+			return "allsale";
+			break;
+		case 0:
+			return "nosale";
+			break;
+	}
+	}
 });
 
 </script>
