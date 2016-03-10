@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSONObject;
 import com.thoughtworks.interview.exception.ItemNotExsitException;
 import com.thoughtworks.interview.model.Discount;
-import com.thoughtworks.interview.model.Item;
 import com.thoughtworks.interview.model.Receipt;
 import com.thoughtworks.interview.model.SoldItem;
 import com.thoughtworks.interview.service.ItemService;
@@ -44,55 +43,26 @@ public class CheckOutController {
 		JSONObject json = CommonTools.StringtoJson(str);
 		Receipt receipt = new Receipt();
 		List<SoldItem> chargedItems = null;
-		try {
-			chargedItems = getChargedItems(json);
-		} catch (ItemNotExsitException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		List<SoldItem> freeItems = new ArrayList<SoldItem>();
 		double total = 0.00;
 		double total_savings = 0.00;
-		boolean showFreeItemList = false;
-		for (String key : json.keySet()) {
-			Item item;
-			try {
-				item = itemService.getItem(key);
-			} catch (ItemNotExsitException e) {
-				model.addAttribute("items", itemService.getItems());
-				model.addAttribute("error", "Item " + key + " not exsit!");
-				return "index";
-			}
-			int qty = json.getIntValue(key);
-			double salePrice = DiscountCaculator.getSubTotal(item, qty);
-			double saving = DiscountCaculator.getSavings(item, qty);
-			total += salePrice;
-			total_savings += saving;
-			if (CommonTools.isExactDivision(saving / item.getPrice())) {
-				showFreeItemList = true;
-				freeItems.add(new SoldItem(item, (int) Math.floor(saving
-						/ item.getPrice()), 0.00, 0.00));
-			}
+		try {
+			chargedItems = DiscountCaculator.getChargedItems(json,itemService);
+			freeItems = DiscountCaculator.getFreeItems(json,itemService);
+			total = DiscountCaculator.getTotal(json,itemService);
+			total_savings = DiscountCaculator.getSavings(json,itemService);
+		} catch (ItemNotExsitException e) {
+			model.addAttribute("items", itemService.getItems());
+			model.addAttribute("error", "Item not exsit!");
+			return "index";
 		}
+		
 		receipt.setItems(chargedItems);
 		receipt.setFreeItemList(freeItems);
-		receipt.setShowFreeItemList(showFreeItemList);
 		receipt.setTotal(total);
 		receipt.setTotal_savings(total_savings);
 		model.addAttribute("receipt", receipt);
 		return "receipt";
-	}
-
-	public List<SoldItem> getChargedItems(JSONObject json) throws ItemNotExsitException {
-		List<SoldItem> chargedItems = new ArrayList<SoldItem>();
-		for (String key : json.keySet()) {
-			Item item = itemService.getItem(key);
-			int qty = json.getIntValue(key);
-			double salePrice = DiscountCaculator.getSubTotal(item, qty);
-			double saving = DiscountCaculator.getSavings(item, qty);
-			chargedItems.add(new SoldItem(item, qty, salePrice, saving));
-		}
-		return chargedItems;
 	}
 
 	@RequestMapping(value = "/discount", method = RequestMethod.PUT)

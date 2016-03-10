@@ -16,16 +16,16 @@
 </div>
 <c:forEach var="item" items="${items }">
 编号：${item.getItemSerial() }，名称：${item.getItemName() }，单价：${item.getPrice() }（元/${item.getUnit() }），类别：${item.getItemCategory() }
-<c:if test="${item.getDiscount() ne 1 }" >
+<c:if test="${item.getDiscount() ne 'BUYTWOGETONEFREE' }" >
 	<input id="${item.getItemSerial() }" class="discount_btn_1" type="button" value="买二赠一" />
 </c:if>
-<c:if test="${item.getDiscount() ne 2 }" >
+<c:if test="${item.getDiscount() ne 'FIVEPERCENTOFF' }" >
 	<input id="${item.getItemSerial() }" class="discount_btn_2" type="button" value="95折" />
 </c:if>
-<c:if test="${item.getDiscount() ne 3 }" >
+<c:if test="${item.getDiscount() ne 'ALLSALE' }" >
 	<input id="${item.getItemSerial() }" class="discount_btn_3" type="button" value="95折和买二赠一同时参加" />
 </c:if>
-<c:if test="${item.getDiscount() ne 0 }" >
+<c:if test="${item.getDiscount() ne 'NODISCOUNT' }" >
 	<input id="${item.getItemSerial() }" class="discount_btn_0" type="button" value="不优惠" />
 </c:if>
 <br>
@@ -44,12 +44,12 @@
 $(document).ready(function(){
 	$(".discount_btn_1,.discount_btn_2,.discount_btn_0,.discount_btn_3").on("click",function(){
 		var id = this.id;
-		var discount = this.className.split('_')[2];
+		var discount = getDiscount(this.className.split('_')[2]);
 		
 		$.ajax({
 			async:false,
 			type:"put",
-			url:"setdiscount",
+			url:"discount",
 			data:new Object({
 				id:id,
 				discount:discount
@@ -66,16 +66,16 @@ $(document).ready(function(){
 	});
 	function getDiscount(obj){
 		switch (obj) {
-		case 1:
+		case "1":
 			return "buytwogetonefree";
 			break;
-		case 2:
+		case "2":
 			return "fivepercentoff";
 			break;
-		case 3:
+		case "3":
 			return "allsale";
 			break;
-		case 0:
+		case "0":
 			return "nosale";
 			break;
 	}
