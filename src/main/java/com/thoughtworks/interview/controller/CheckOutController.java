@@ -18,15 +18,18 @@ import com.thoughtworks.interview.exception.ItemNotExsitException;
 import com.thoughtworks.interview.model.Discount;
 import com.thoughtworks.interview.model.Receipt;
 import com.thoughtworks.interview.model.SoldItem;
+import com.thoughtworks.interview.service.CheckOutService;
 import com.thoughtworks.interview.service.ItemService;
 import com.thoughtworks.interview.utils.CommonTools;
-import com.thoughtworks.interview.utils.DiscountCaculator;
+import com.thoughtworks.interview.utils.DiscountCalculator;
 
 @Controller
 public class CheckOutController {
 
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private CheckOutService checkOutService;
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public String viewCheckOutPage(Model model) {
@@ -47,10 +50,10 @@ public class CheckOutController {
 		double total = 0.00;
 		double total_savings = 0.00;
 		try {
-			chargedItems = DiscountCaculator.getChargedItems(json,itemService);
-			freeItems = DiscountCaculator.getFreeItems(json,itemService);
-			total = DiscountCaculator.getTotal(json,itemService);
-			total_savings = DiscountCaculator.getSavings(json,itemService);
+			chargedItems = checkOutService.getChargedItems(json,itemService);
+			freeItems = checkOutService.getFreeItems(json,itemService);
+			total = checkOutService.getTotal(json,itemService);
+			total_savings = checkOutService.getSavings(json,itemService);
 		} catch (ItemNotExsitException e) {
 			model.addAttribute("items", itemService.getItems());
 			model.addAttribute("error", "Item not exsit!");
